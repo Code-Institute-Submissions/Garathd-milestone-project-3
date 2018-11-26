@@ -15,7 +15,9 @@
   
    <!-- Scripts -->
    <script src="{{ url_for('static', filename='js/jquery.js')  }}"></script>
-
+   {% if title == "Home Page" %}
+   <script src="{{ url_for('static', filename='js/index.js')  }}"></script>
+   {% endif %}
    
 </head>
 

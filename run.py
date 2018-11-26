@@ -14,16 +14,10 @@ def index():
     description = "Spanish Word Game"
     
     questions = []
-    answers = []
-    
+
     
     with open("data/words.json", "r") as json_data:
         questions = json.load(json_data)
-
-    result = len(questions)
-    for x in range(5):
-        print "Random Numbers are: {0} ".format(random.randint(1,result))
-        
         
     return render_template("index.html", 
     title=title, 
@@ -31,6 +25,17 @@ def index():
     questions=questions, 
     counter=counter)
     
+@app.route('/getQuestions')
+def getQuestions():
+    
+    questions = []
+    
+    with open("data/words.json", "r") as json_data:
+        questions = json.load(json_data)
+        
+    return "{0}".format(questions)
+    
+            
 @app.route('/about')
 def about():
     title = "About"
