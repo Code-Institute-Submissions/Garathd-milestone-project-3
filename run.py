@@ -1,21 +1,35 @@
 import os
+import json
+import random
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-def question(data):
-      with open("data/words.json", "a") as file:
-        file.writelines(data)
+counter = 0
 
 @app.route('/' , methods=["GET", "POST"])
 def index():
+    #if request.method == "POST":
     title = "Home Page"
     description = "Spanish Word Game"
     
-    if request.method == "POST":
-        question(request.form)
+    questions = []
+    answers = []
+    
+    
+    with open("data/words.json", "r") as json_data:
+        questions = json.load(json_data)
+
+    result = len(questions)
+    for x in range(5):
+        print "Random Numbers are: {0} ".format(random.randint(1,result))
         
-    return render_template("index.html", title=title, description=description)
+        
+    return render_template("index.html", 
+    title=title, 
+    description=description, 
+    questions=questions, 
+    counter=counter)
     
 @app.route('/about')
 def about():

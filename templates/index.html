@@ -1,10 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <h1>{{ title }}</h1>
-<form name="questions" method="POST">
-    <input type="text" name="english"/>
-    <input type="text" name="spanish"/>
-    <input type="submit" value="Submit"/>
-</form>
+<!--<form name="questions" method="POST">-->
+<!--    <input type="text" name="english"/>-->
+<!--    <input type="text" name="spanish"/>-->
+<!--    <input type="submit" value="Submit"/>-->
+<!--</form>-->
+
+<div class="question-form">
+    <div class="row">
+        <div class="col-md-12">
+             <h2>What does this word mean: {{ questions[0].Spanish }} ?</h2>
+             <hr/>
+             <ul style="display: inline">
+                 <li></li>
+             </ul>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
