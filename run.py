@@ -1,12 +1,20 @@
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-@app.route('/')
+def question(data):
+      with open("data/words.json", "a") as file:
+        file.writelines(data)
+
+@app.route('/' , methods=["GET", "POST"])
 def index():
     title = "Home Page"
     description = "Spanish Word Game"
+    
+    if request.method == "POST":
+        question(request.form)
+        
     return render_template("index.html", title=title, description=description)
     
 @app.route('/about')
