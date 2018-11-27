@@ -2,42 +2,45 @@
 
 $(document).ready(function() {
 
-    var write = document.getElementById("questions");
     var questions = [];
+    var writing = document.getElementById("questions");
+    
 
-    //Get Data Function
-    function getData(callback) {
-        $.get("/getQuestions", function(response) {
-            var data = JSON.stringify(response)
-            callback(data);
+    function searchList(callback) {
+        var array = [];
+        $.getJSON(`https://api.myjson.com/bins/127waa`, function(data) {
+            $.each(data, function(index, value) {
+                array.push(value);
+            });
+            callback(array);
         });
     };
 
-    //Initial Loading Information
-    function load() {
-
-        var results = [];
-
-        getData(function(response) {
-            questions.push(response);
-
-            questions.forEach(function(entry) {
-                results.push(`
-                       <div class="row">
-                            <div class="col-md-12">
-                                 <h2>What does this word mean: ${entry.Spanish} ?</h2>
-                                 <button id="test" class="btn btn-primary">Test</button>
-                            </div>
-                       </div>
+    function getQuestions() {
+        searchList(function(response) {
+            response.forEach(function(entry) {
+                questions.push(`
+                <div class="row">
+                 <div class="col-md-12">
+                     <h2>What is the meaning of: ${entry.Spanish}?</h2>
+                     <ul>
+                         <l1><label><p>Its : ${entry.English}</p></label></l1>
+                     </ul>
+                 </div> 
+                </div>
                 `);
             });
-            write.innerHTML = results.join('');
-
+        
+            writing.innerHTML = questions.join('');
         });
-
     };
 
-    //Load the Data on Page Load
-    load();
+
+
+
+
+    //Initialise
+    getQuestions();
+
 
 })
