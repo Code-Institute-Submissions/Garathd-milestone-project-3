@@ -1,0 +1,12 @@
+{% extends 'base.html' %} {% block content %}
+<h1>{{ title }}</h1>
+
+<h2>Can you translate the following Word: {{ results.Spanish }}</h2>
+<p>Your Answer Was: {{ answer }}</p>
+<p>The Correct Answer Was: {{ results.English }}</p>
+
+<form name="next" method="POST">
+    <button class="btn btn-primary">Next</button>
+</form>
+
+{% endblock %}
