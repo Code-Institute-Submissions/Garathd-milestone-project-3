@@ -35,6 +35,9 @@ def questions():
     #Get current question
     results = amount[counter]
     
+    #Get correct answers
+    correct = question_functions.getCorrectAnswers()
+    
     #Submit answer
     if request.method == "POST":
         return redirect("questions/{0}".format(request.form["answer"])) 
@@ -45,7 +48,8 @@ def questions():
     description=description, 
     results=results, 
     counter=counter, 
-    amount=len(amount))
+    amount=len(amount),
+    correct=correct)
     
 @app.route('/questions/<question>', methods=["GET","POST"])
 def askQuestions(question):
@@ -68,14 +72,18 @@ def askQuestions(question):
 
     #Check if users answer is correct
     if results["English"] == answer:
+        passed = True
         mark = "Well Done, You answered correctly!"
     else:
+        passed = False
         mark = "Your answer is incorrect!"
         
     #Increment count to get the next question    
     if request.method == "POST":
-     question_functions.setCount()
-     return redirect("questions") 
+        if passed == True:
+            question_functions.setCorrectAnswers()
+        question_functions.setCount()
+        return redirect("questions") 
 
     #Load Page Template
     return render_template("answered.html",

@@ -2,7 +2,8 @@
 import json
 
 #Setting up a counter for Questions
-count = 0;
+count = 0
+correct = 0
 
 #Get all the questions from JSON file
 def getQuestions():
@@ -25,8 +26,15 @@ def setCount():
     #Get the amount of questions
     end = len(getQuestions())
     
-    #Checking if at the end of the question list
+    #Checking if at the end of the question list and reset all values
     if count == end:
         count = 0
+        global correct
+        correct = 0
 
+def setCorrectAnswers():
+    global correct
+    correct += 1
     
+def getCorrectAnswers():
+    return "{0}".format(correct)
