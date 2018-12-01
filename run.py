@@ -4,27 +4,45 @@ from flask import Flask, render_template, request, redirect
 
 app = Flask(__name__)
 
-counter = 0;
-
 def getQuestions():
     with open("data/words.json", "r") as the_questions:
         q = json.load(the_questions)
     return q
 
+def getCount():
+    with open("data/list.txt", "r") as the_count:
+        q = the_count.readlines()
+        qa = q[0]
+        return int(qa)
+
+def setCount():
+    current = getCount()
+   
+    ccn = int(current)
+    ccn += 1
+    
+    with open("data/list.txt", "w") as file:
+        file.write("{0}".format(ccn))
+
+    return current
+        
 @app.route('/' , methods=["GET", "POST"])
 def index():
     title = "Home Page"
     description = "Welcome"
+    
     return render_template("index.html", title=title, description=description)
     
 @app.route('/questions', methods=["GET","POST"])
 def questions():
     
+    title = "Question Game"
+    description = "Spanish Word Game"
+    
+    counter = getCount()
     r = getQuestions()
     results = r[counter]
     
-    title = "Question Game"
-    description = "Spanish Word Game"
     if request.method == "POST":
         return redirect("questions/{0}".format(request.form["answer"])) 
     
@@ -32,27 +50,39 @@ def questions():
     
 @app.route('/questions/<question>', methods=["GET","POST"])
 def askQuestions(question):
-    
-    r = getQuestions()
-    results = r[counter]
-    answer = question
     title = "Question Game"
     description = "Spanish Word Game"
+
     
+    counter = getCount()
+    r = getQuestions()
+    
+    results = r[counter]
+    answer = question
+
+    if results["English"] == answer:
+        mark = "Well Done, You answered correctly!"
+    else:
+        mark = "Your answer is incorrect!"
+        
+
     if request.method == "POST":
-        return redirect("questions") 
+     setCount()
+     return redirect("questions") 
 
     return render_template("answered.html",
     title=title,
     description=description,
     results=results,
-    answer=answer)
+    answer=answer,
+    mark=mark)
             
 @app.route('/about')
 def about():
     title = "About"
     description = "A little bit About Us"
-    return render_template("about.html", title=title, description=description)
+    return render_template("about.html",
+    title=title, description=description)
     
 @app.route('/contact')
 def contact():

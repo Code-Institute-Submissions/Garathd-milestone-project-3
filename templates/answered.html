@@ -1,9 +1,11 @@
 {% extends 'base.html' %} {% block content %}
-<h1>{{ title }}</h1>
 
-<h2>Can you translate the following Word: {{ results.Spanish }}</h2>
-<p>Your Answer Was: {{ answer }}</p>
-<p>The Correct Answer Was: {{ results.English }}</p>
+<div id="answers">
+    <h2>Can you translate the following Word: <i>{{ results.Spanish }}</i></h2>
+    <p><strong>Your Answer Was:</strong> <i>{{ answer }}</i></p>
+    <p><strong>The Correct Answer Was:</strong> <i>{{ results.English }}</i></p>
+    <h3>{{ mark }}</h3>
+</div>
 
 <form name="next" method="POST">
     <button class="btn btn-primary">Next</button>

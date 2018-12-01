@@ -1,7 +1,0 @@
-/*global $*/
-
-$(document).ready(function() {
-
-
-
-})

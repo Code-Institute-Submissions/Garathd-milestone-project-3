@@ -15,8 +15,8 @@
 
   <!-- Scripts -->
   <script src="{{ url_for('static', filename='js/jquery.js')  }}"></script>
-  {% if title == "Home Page" %}
-  <script src="{{ url_for('static', filename='js/index.js')  }}"></script>
+  {% if title == "Question Game" %}
+  <script src="{{ url_for('static', filename='js/questions.js')  }}"></script>
   {% endif %}
 
 </head>
@@ -76,7 +76,7 @@
   <hr>
 
   <!-- Footer -->
-  <footer>
+  <footer id="footer">
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">

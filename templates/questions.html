@@ -1,14 +1,18 @@
 {% extends 'base.html' %} {% block content %}
-<h1>{{ title }}</h1>
 
-<p>counter value at: {{ counter }}</p>
+<p><strong>Question: {{ counter + 1 }}</strong></p>
 
-
-<h2>Can you translate the following Word: {{ results.Spanish }}</h2>
+<h2>Can you translate the following Word: <i>{{ results.Spanish }}</i></h2>
 <form name="answer" method="POST">
-    <label for="answer">Answer:</label>
-    <input type="text" id="answer" name="answer">
-    <button class="btn btn-primary">Check!</button>
+    <div class="row">
+        <div class="col-md-6">
+            <input id="user-input" class="form-control" type="text" id="answer" name="answer" placeholder="Answer...">
+        </div>
+        <div class="col-md-6">
+            <button id="check" class="btn btn-primary">Check!</button>
+        </div>
+    </div>
+    
 </form>
 
 {% endblock %}
