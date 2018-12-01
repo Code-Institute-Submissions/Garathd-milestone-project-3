@@ -104,10 +104,21 @@ def askQuestions(question):
 @app.route('/results', methods=["GET","POST"])
 def results():
     
+    title = "Quiz Results"
+    description = "Answers to the Spanish Quiz"
+    
     correct_answers = question_functions.getCorrectAnswers()
     total_questions = len(question_functions.getQuestions())
     
-    return render_template("results.html", correct_answers=correct_answers, total_questions=total_questions)
+    if request.method == "POST":
+        if request.form["restart"] == "restart":
+            return redirect("questions")
+        
+    return render_template("results.html", 
+    correct_answers=correct_answers, 
+    total_questions=total_questions, 
+    title=title, 
+    description=description)
               
             
 @app.route('/about')
