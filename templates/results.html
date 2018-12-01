@@ -1,0 +1,25 @@
+{% extends 'base.html' %} {% block content %}
+
+<div id="answers">
+    <h2>You have finished the Quiz!</h2>
+    <p><strong>You got: {{ correct_answers }} out of {{ total_questions }}</strong> <i>{{ answer }}</i></p>
+    <h3>{{ mark }}</h3>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <form name="score" method="POST">
+            <button class="btn btn-primary">Submit Score</button>
+        </form>
+
+    </div>
+    <div class="col-md-6">
+        <form name="restart" method="POST">
+            <button class="btn btn-danger">Restart</button>
+        </form>
+    </div>
+</div>
+
+
+
+{% endblock %}

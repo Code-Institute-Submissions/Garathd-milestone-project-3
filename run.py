@@ -60,7 +60,7 @@ def askQuestions(question):
 
     #Find out what question it's on
     counter = question_functions.getCount()
-    
+
     #Get the questions
     amount = question_functions.getQuestions()
     
@@ -77,14 +77,22 @@ def askQuestions(question):
     else:
         passed = False
         mark = "Your answer is incorrect!"
-        
+
     #Increment count to get the next question    
     if request.method == "POST":
         if passed == True:
             question_functions.setCorrectAnswers()
-        question_functions.setCount()
-        return redirect("questions") 
+            
+        end_point = counter 
+        end_point +=1
 
+        #Check if the quiz is finished  
+        if end_point == len(amount):
+            return redirect("results") 
+        else:
+            question_functions.setCount()
+            return redirect("questions")     
+            
     #Load Page Template
     return render_template("answered.html",
     title=title,
@@ -92,6 +100,15 @@ def askQuestions(question):
     results=results,
     answer=answer,
     mark=mark)
+            
+@app.route('/results', methods=["GET","POST"])
+def results():
+    
+    correct_answers = question_functions.getCorrectAnswers()
+    total_questions = len(question_functions.getQuestions())
+    
+    return render_template("results.html", correct_answers=correct_answers, total_questions=total_questions)
+              
             
 @app.route('/about')
 def about():

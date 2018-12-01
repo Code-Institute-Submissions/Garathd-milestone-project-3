@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import json
+from flask import render_template, redirect
 
 #Setting up a counter for Questions
 count = 0
@@ -19,6 +20,7 @@ def getCount():
 def setCount():
     
     global count
+    global correct
     
     #Incrementing the count
     count += 1
@@ -29,8 +31,8 @@ def setCount():
     #Checking if at the end of the question list and reset all values
     if count == end:
         count = 0
-        global correct
         correct = 0
+        
 
 def setCorrectAnswers():
     global correct
