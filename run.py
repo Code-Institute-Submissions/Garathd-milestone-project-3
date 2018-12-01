@@ -1,31 +1,12 @@
 import os
 import json
+import question_functions
+
+
 from flask import Flask, render_template, request, redirect
 
 app = Flask(__name__)
 
-def getQuestions():
-    with open("data/words.json", "r") as the_questions:
-        q = json.load(the_questions)
-    return q
-
-def getCount():
-    with open("data/list.txt", "r") as the_count:
-        q = the_count.readlines()
-        qa = q[0]
-        return int(qa)
-
-def setCount():
-    current = getCount()
-   
-    ccn = int(current)
-    ccn += 1
-    
-    with open("data/list.txt", "w") as file:
-        file.write("{0}".format(ccn))
-
-    return current
-        
 @app.route('/' , methods=["GET", "POST"])
 def index():
     title = "Home Page"
@@ -39,8 +20,8 @@ def questions():
     title = "Question Game"
     description = "Spanish Word Game"
     
-    counter = getCount()
-    r = getQuestions()
+    counter = question_functions.getCount()
+    r = question_functions.getQuestions()
     results = r[counter]
     
     if request.method == "POST":
@@ -54,8 +35,8 @@ def askQuestions(question):
     description = "Spanish Word Game"
 
     
-    counter = getCount()
-    r = getQuestions()
+    counter = question_functions.getCount()
+    r = question_functions.getQuestions()
     
     results = r[counter]
     answer = question
@@ -65,9 +46,8 @@ def askQuestions(question):
     else:
         mark = "Your answer is incorrect!"
         
-
     if request.method == "POST":
-     setCount()
+     question_functions.setCount()
      return redirect("questions") 
 
     return render_template("answered.html",
