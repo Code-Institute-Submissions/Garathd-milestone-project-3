@@ -1,34 +1,32 @@
+#!/usr/bin/env python
 import json
 
+#Setting up a counter for Questions
+count = 0;
+
+#Get all the questions from JSON file
 def getQuestions():
     with open("data/test.json", "r") as the_questions:
         q = json.load(the_questions)
     return q
 
+#Get the count to find out what question it is on
 def getCount():
-    with open("data/list.txt", "r") as the_count:
-        q = the_count.readlines()
-        qa = q[0]
-        return int(qa)
+    return int(count)
 
+#Incrementing the count
 def setCount():
-    current = getCount()
-    end = getQuestions()
-
-    ccn = int(current)
-    ccn += 1
     
-    #Checking Amount of Questions
-    end_scope = len(end)
-
-    #Checking if all the questions have came up
-    if end_scope == ccn:
-        reset()
-    else: 
-        with open("data/list.txt", "w") as file:
-            file.write("{0}".format(ccn))
-        return current
+    global count
     
-def reset():
-        with open("data/list.txt", "w") as file:
-            file.write("0")
+    #Incrementing the count
+    count += 1
+    
+    #Get the amount of questions
+    end = len(getQuestions())
+    
+    #Checking if at the end of the question list
+    if count == end:
+        count = 0
+
+    

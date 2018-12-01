@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 
-<p><strong>Question: {{ counter + 1 }}</strong></p>
+<p><strong>Question: {{ counter + 1 }} / {{ amount }}</strong></p>
 
 <h2>Can you translate the following Word: <i>{{ results.Spanish }}</i></h2>
 <form name="answer" method="POST">
