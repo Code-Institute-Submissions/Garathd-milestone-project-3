@@ -104,16 +104,27 @@ def askQuestions(question):
 @app.route('/results', methods=["GET","POST"])
 def results():
     
+    #Set up page
     title = "Quiz Results"
     description = "Answers to the Spanish Quiz"
     
+    #Setup for highscores
     correct_answers = question_functions.getCorrectAnswers()
     total_questions = len(question_functions.getQuestions())
     
+    #Checking if a form has been posted
     if request.method == "POST":
-        if request.form["restart"] == "restart":
-            return redirect("questions")
-        
+         print("Check request form: {0}".format(request.form))
+         
+         #Check if restart was selected
+         if(len(request.form) == 1):
+             return redirect("questions")
+             
+         #Write the highscore to text file
+         else: 
+             final_score = "{0} : {1}/{2}\n".format(request.form["username"], correct_answers, total_questions)
+             question_functions.set_high_score(final_score)
+
     return render_template("results.html", 
     correct_answers=correct_answers, 
     total_questions=total_questions, 

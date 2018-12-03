@@ -32,11 +32,21 @@ def setCount():
     if count == end:
         count = 0
         correct = 0
-        
 
+#Mark Answer as Correct        
 def setCorrectAnswers():
     global correct
     correct += 1
-    
+
+#Get correct answers value to display to webpage    
 def getCorrectAnswers():
     return "{0}".format(correct)
+    
+#Writing the highscores to text file    
+def set_high_score(data):
+    filename = "data/highscore.txt"
+    """Handle the process of writing data to a file"""
+    with open(filename, "a") as file:
+        file.writelines(data)
+        
+        

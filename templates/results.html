@@ -20,14 +20,18 @@
 </div>
 
 <div id="submission">
-    <div class="row">
-        <div class="col-md-6">
-            <input class="form-control" type="text" name="username" placeholder="Enter your username" autofocus/>
+    
+    <form method="POST">
+        <div class="row">
+            <div class="col-md-6">
+                <input class="form-control" type="text" name="username" placeholder="Enter your username" autofocus/>
+            </div>
+            <div class="col-md-6">
+                <button id="entry" name="highscore" value="highscore" class="btn btn-primary">Send</button>
+            </div>
         </div>
-        <div class="col-md-6">
-            <button id="entry" class="btn btn-primary" type="submit" value="Submit">Send</button>
-        </div>
-    </div>
+    </form>
+    
 </div>
 
 <script>
