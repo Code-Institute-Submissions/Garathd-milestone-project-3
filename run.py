@@ -122,8 +122,8 @@ def results():
              
          #Write the highscore to text file
          else: 
-             final_score = "{0} : {1}/{2}\n".format(request.form["username"], correct_answers, total_questions)
-             question_functions.set_high_score(final_score)
+             question_functions.set_high_score("{}\n".format(request.form["username"]))
+             question_functions.set_high_score("{}\n".format(correct_answers))
 
     return render_template("results.html", 
     correct_answers=correct_answers, 
@@ -155,6 +155,28 @@ def contact():
     return render_template("contact.html", 
     title=title, 
     description=description)
+    
+@app.route('/scores')
+def scores():
+    
+     #Set up Page
+    title = "High Scores"
+    description = "Checkout the Highest Scores"
+
+    quiz_results = question_functions.get_high_scores()
+    
+    score_one = [quiz_results[0], quiz_results[1]]
+    score_two = [quiz_results[2], quiz_results[3]]
+    score_three = [quiz_results[4], quiz_results[5]]
+    
+    #Load Page Template
+    return render_template("scores.html", 
+    title=title, 
+    description=description,
+    score_one=score_one, 
+    score_two=score_two, 
+    score_three=score_three)
+
 
 app.run(
     host=os.getenv('IP'), 

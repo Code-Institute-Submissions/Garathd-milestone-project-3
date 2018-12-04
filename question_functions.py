@@ -49,4 +49,9 @@ def set_high_score(data):
     with open(filename, "a") as file:
         file.writelines(data)
         
-        
+def get_high_scores():
+    scores = []
+    with open("data/highscore.txt", "r") as high_scores:
+        scores = high_scores.readlines()
+    return scores
+

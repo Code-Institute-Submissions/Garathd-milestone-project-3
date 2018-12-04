@@ -1,0 +1,10 @@
+{% extends 'base.html' %} {% block content %}
+
+<div id="highscores">
+    <h2>Top 3 Scores</h2>
+    <p>{{ score_one[0] }} : {{ score_one[1] }}</p>
+    <p>{{score_two[0]}} : {{score_two[1]}}</p>
+    <p>{{score_three[0]}} : {{score_three[1]}}</p>
+</div>
+
+{% endblock %}
