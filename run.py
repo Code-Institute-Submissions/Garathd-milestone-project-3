@@ -122,8 +122,8 @@ def results():
              
          #Write the highscore to text file
          else: 
-             question_functions.set_high_score("{}\n".format(request.form["username"]))
-             question_functions.set_high_score("{}\n".format(correct_answers))
+             question_functions.set_score(request.form["username"], correct_answers)
+
 
     return render_template("results.html", 
     correct_answers=correct_answers, 
@@ -163,19 +163,14 @@ def scores():
     title = "High Scores"
     description = "Checkout the Highest Scores"
 
-    quiz_results = question_functions.get_high_scores()
-    
-    score_one = [quiz_results[0], quiz_results[1]]
-    score_two = [quiz_results[2], quiz_results[3]]
-    score_three = [quiz_results[4], quiz_results[5]]
+    #Get the 10 most recent scores
+    quiz_results = question_functions.get_scores()
     
     #Load Page Template
     return render_template("scores.html", 
     title=title, 
     description=description,
-    score_one=score_one, 
-    score_two=score_two, 
-    score_three=score_three)
+    quiz_results=quiz_results)
 
 
 app.run(

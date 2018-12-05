@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import os
 import json
 from flask import render_template, redirect
 
@@ -42,16 +43,37 @@ def setCorrectAnswers():
 def getCorrectAnswers():
     return "{0}".format(correct)
     
-#Writing the highscores to text file    
-def set_high_score(data):
-    filename = "data/highscore.txt"
-    """Handle the process of writing data to a file"""
-    with open(filename, "a") as file:
-        file.writelines(data)
-        
-def get_high_scores():
+#Writing the users score to text file    
+def set_score(username, score):
+    
+    score_count = len(get_scores())
+    
+    if score_count >= 5:
+        overwrite_score(username, score)
+    else:
+        data = "Username: {0}  Score: {1}\n".format(username, score)
+        filename = "data/highscore.txt"
+        """Handle the process of writing data to a file"""
+        with open(filename, "a") as file:
+            file.writelines(data)
+
+def get_scores():
     scores = []
     with open("data/highscore.txt", "r") as high_scores:
         scores = high_scores.readlines()
     return scores
 
+def overwrite_score(username, score):
+    scores = []
+    scores = get_scores()
+    scores.pop(0)
+    
+    filename = "data/highscore.txt"
+    os.remove(filename)
+    
+    """Handle the process of writing data to a file"""
+    for sc in scores:
+        with open(filename, "a") as file:
+            file.writelines(sc)
+            
+    set_score(username, score)
