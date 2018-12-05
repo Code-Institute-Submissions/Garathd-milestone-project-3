@@ -51,7 +51,7 @@ def set_score(username, score):
     if score_count >= 5:
         overwrite_score(username, score)
     else:
-        data = "Username: {0}  Score: {1}\n".format(username, score)
+        data = "{0} got a total of {1} points\n".format(username, score)
         filename = "data/highscore.txt"
         """Handle the process of writing data to a file"""
         with open(filename, "a") as file:

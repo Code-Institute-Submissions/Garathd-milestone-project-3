@@ -123,6 +123,7 @@ def results():
          #Write the highscore to text file
          else: 
              question_functions.set_score(request.form["username"], correct_answers)
+             return redirect("scores")
 
 
     return render_template("results.html", 
@@ -160,8 +161,8 @@ def contact():
 def scores():
     
      #Set up Page
-    title = "High Scores"
-    description = "Checkout the Highest Scores"
+    title = "Recent Scores"
+    description = "Checkout the Most Recent Scores"
 
     #Get the 10 most recent scores
     quiz_results = question_functions.get_scores()
