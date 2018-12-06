@@ -112,20 +112,25 @@ def results():
     correct_answers = question_functions.getCorrectAnswers()
     total_questions = len(question_functions.getQuestions())
     
-    #Reset Questions
-    question_functions.resetQuestions()
-    
     #Checking if a form has been posted
     if request.method == "POST":
          print("Check request form: {0}".format(request.form))
          
          #Check if restart was selected
          if(len(request.form) == 1):
+             
+             #Reset Questions
+             question_functions.resetQuestions()
+             
              return redirect("questions")
              
          #Write the score to text file
          else: 
              question_functions.set_score(request.form["username"], correct_answers)
+            
+             #Reset Questions
+             question_functions.resetQuestions()
+             
              return redirect("scores")
 
     #Load Page Template
