@@ -1,2 +1,11 @@
 #answers {
   margin: 5% 0 5% 0; }
+
+.question-form {
+  padding: 0 5%; }
+
+.result {
+  margin-top: 2.5%; }
+
+.result p {
+  font-size: 22px; }

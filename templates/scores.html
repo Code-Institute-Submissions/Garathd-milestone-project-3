@@ -1,10 +1,15 @@
 {% extends 'base.html' %} {% block content %}
 
 <div id="highscores">
-    <h2>Recent Scores</h2>
-    {% for results in quiz_results %}
-    <p>{{ results }}</p>
-    {% endfor %}
+    <div class="row">
+        {% for results in quiz_results %}
+        <div class="col-md-4">
+            <div class="result">
+                <p>{{ results }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </div>
 
 {% endblock %}

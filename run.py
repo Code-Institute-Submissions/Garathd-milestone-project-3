@@ -7,19 +7,17 @@ from flask import Flask, render_template, request, redirect
 
 app = Flask(__name__)
 
-@app.route('/' , methods=["GET", "POST"])
+""" 
+Redirects the homepage to the questions page.
+The Questions Page is the real homepage.
+This is just done for the purpose of routing.
+"""
+@app.route('/')
 def index():
+    return redirect("questions")
     
-    #Set up Page
-    title = "Home Page"
-    description = "Welcome"
-    
-    #Load Page Template
-    return render_template("index.html", 
-    title=title, 
-    description=description)
-    
-@app.route('/questions', methods=["GET","POST"])
+
+@app.route('/questions' , methods=["GET", "POST"])
 def questions():
     
     #Set up Page
@@ -50,7 +48,8 @@ def questions():
     counter=counter, 
     amount=len(amount),
     correct=correct)
-    
+
+
 @app.route('/questions/<question>', methods=["GET","POST"])
 def askQuestions(question):
     
@@ -100,6 +99,7 @@ def askQuestions(question):
     results=results,
     answer=answer,
     mark=mark)
+    
             
 @app.route('/results', methods=["GET","POST"])
 def results():
@@ -111,6 +111,9 @@ def results():
     #Setup for highscores
     correct_answers = question_functions.getCorrectAnswers()
     total_questions = len(question_functions.getQuestions())
+    
+    #Reset Questions
+    question_functions.resetQuestions()
     
     #Checking if a form has been posted
     if request.method == "POST":
@@ -125,42 +128,18 @@ def results():
              question_functions.set_score(request.form["username"], correct_answers)
              return redirect("scores")
 
-
+    #Load Page Template
     return render_template("results.html", 
     correct_answers=correct_answers, 
     total_questions=total_questions, 
     title=title, 
     description=description)
+    
               
-            
-@app.route('/about')
-def about():
-    
-    #Set up Page
-    title = "About"
-    description = "A little bit About Us"
-    
-    #Load Page Template
-    return render_template("about.html",
-    title=title, 
-    description=description)
-    
-@app.route('/contact')
-def contact():
-    
-    #Set up Page
-    title = "Contact Page"
-    description = "Get in Touch"
-    
-    #Load Page Template
-    return render_template("contact.html", 
-    title=title, 
-    description=description)
-    
 @app.route('/scores')
 def scores():
     
-     #Set up Page
+    #Set up Page
     title = "Recent Scores"
     description = "Checkout the Most Recent Scores"
 
@@ -172,7 +151,20 @@ def scores():
     title=title, 
     description=description,
     quiz_results=quiz_results)
+    
 
+@app.route('/about')
+def about():
+    
+    #Set up Page
+    title = "About Page"
+    description = "Site Description and Info"
+    
+    #Load Page Template
+    return render_template("about.html",
+    title=title,
+    description=description)
+    
 
 app.run(
     host=os.getenv('IP'), 
