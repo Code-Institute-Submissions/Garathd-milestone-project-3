@@ -67,7 +67,7 @@ def askQuestions(question):
     results = amount[counter]
     
     #Get user answer
-    answer = question
+    answer = question.lower()
 
     #Check if users answer is correct
     if results["English"] == answer:
