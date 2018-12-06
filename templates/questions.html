@@ -1,18 +1,26 @@
 {% extends 'base.html' %} {% block content %}
 
 <div class="question-form">
+    
+    <div class="question-status">
+        <div class="row">
+            <div class="col-md-6">
+                <strong>Question:</strong> {{ counter + 1 }} / {{ amount }}
+            </div>
+            <div class="col-md-6">
+                <strong>Correct Answers:</strong> {{ correct }}
+            </div>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-md-12">
-
-            <p><strong>Question: {{ counter + 1 }} / {{ amount }}</strong> - <strong>Correct Answers: {{ correct }}</strong></p>
-
             <h2>Can you translate the following Word: <i>{{ results.Spanish }}</i></h2>
 
             <form name="answer" method="POST">
                 <div class="row">
                     <div class="col-md-6">
-                        <input id="user-input" class="form-control" type="text" id="answer" name="answer" placeholder="Answer..." autofocus>
+                        <input id="user-input" onkeyup="smalllettersonly(this)" class="form-control" type="text" id="answer" name="answer" placeholder="Answer..." autofocus>
                     </div>
                     <div class="col-md-6">
                         <button id="check" class="btn btn-primary">Check!</button>

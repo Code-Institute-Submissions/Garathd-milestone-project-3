@@ -1,13 +1,32 @@
 #answers {
-  margin: 5% 0 5% 0; }
+  margin: 5% 0 5% 0;
+}
 
 .question-form {
-  padding: 0 5%}
-
-.result{
-    margin-top:2.5%;
+  padding: 0 5%
 }
 
-.result p{
-    font-size:22px;
+.result {
+  margin-top: 2.5%;
 }
+
+.result p {
+  font-size: 22px;
+}
+
+.scroll-top {
+  float: right !important;
+  padding: 1%;
+  padding-top: 1%;
+  padding-top: 1%;
+}
+
+.question-status{
+  padding: 0 0 5% 0;
+}
+
+.fa {
+  font-weight: 900;
+  font-size: 30px;
+  color: #2E2E2E;
+  opacity: 0.3; }

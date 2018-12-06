@@ -77,9 +77,9 @@ class TestQuestions(unittest.TestCase):
                     for old_score in backup_scores:
                         with open(score_list, "a+") as file:
                             file.writelines(old_score)
-                
+                            
+            #Failed the test    
             else:
-                #Failed the test
                 result = False
      
         self.assertTrue(result)
