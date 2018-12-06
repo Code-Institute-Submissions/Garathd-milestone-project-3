@@ -1,14 +1,14 @@
 {% extends 'base.html' %} {% block content %}
 
 <div id="answers">
-    <h2>Can you translate the following Word: <i>{{ results.Spanish }}</i></h2>
+    <h3>Can you translate: <i>{{ results.Spanish }}</i></h3>
     <p><strong>Your Answer Was:</strong> <i>{{ answer }}</i></p>
     <p><strong>The Correct Answer Was:</strong> <i>{{ results.English }}</i></p>
-    <h3>{{ mark }}</h3>
+    <h4>{{ mark }}</h4>
 </div>
 
 <form name="next" method="POST">
-    <button class="btn btn-primary" autofocus>Next</button>
+    <button class="next-question btn btn-primary" autofocus>Next</button>
 </form>
 
 {% endblock %}

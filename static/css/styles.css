@@ -10,7 +10,7 @@
 .result p {
   font-size: 22px; }
 
-.scroll-top {
+.scrollTop {
   float: right !important;
   padding: 1%;
   padding-top: 1%;
@@ -24,3 +24,10 @@
   font-size: 30px;
   color: #2E2E2E;
   opacity: 0.3; }
+
+@media only screen and (max-width: 768px) {
+  #check {
+    margin-top: 5%;
+    float: right; }
+  #score {
+    margin-bottom: 5%; } }
