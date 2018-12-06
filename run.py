@@ -108,7 +108,7 @@ def results():
     title = "Quiz Results"
     description = "Answers to the Spanish Quiz"
     
-    #Setup for highscores
+    #Setup for scores
     correct_answers = question_functions.getCorrectAnswers()
     total_questions = len(question_functions.getQuestions())
     
@@ -123,7 +123,7 @@ def results():
          if(len(request.form) == 1):
              return redirect("questions")
              
-         #Write the highscore to text file
+         #Write the score to text file
          else: 
              question_functions.set_score(request.form["username"], correct_answers)
              return redirect("scores")

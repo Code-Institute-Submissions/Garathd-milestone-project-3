@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import unittest
+import os
 import question_functions
 
 class TestQuestions(unittest.TestCase):
@@ -34,6 +35,50 @@ class TestQuestions(unittest.TestCase):
         
         #Checking if the new value is greater than the old one
         self.assertGreater(b,a)
+    
+    def test_set_score(self):
+        """
+        This test is used to copy the scores then create a test score which is then added
+        to the score.txt file and then this record is deleted once it has been found. After
+        which the original score data is restored
+        """
+        score_list = "data/score.txt"
+        username = "unittest"
+        score = "0x01"
+        result = 0
+        
+        backup_scores = question_functions.get_scores()
+
+        question_functions.set_score(username, score)
+        
+        #Writing test data to the score.txt file
+        test_score = question_functions.get_scores()
+        
+        """
+        
+        """
+        for sc in test_score:
+            if sc == "unittest got a total of 0x01 points\n":
+                result = True
+                
+                #Delete the score.txt file
+                os.remove(score_list)
+                
+                #If scores are empty then create new score.txt file
+                if len(backup_scores) == 0:
+                    f = open(score_list, "w+")
+                    f.close()
+                    
+                #Else copy backup of scores to a new text file named the same    
+                else:
+                    for old_score in backup_scores:
+                        with open(score_list, "a+") as file:
+                            file.writelines(old_score)
+                
+            else:
+                result = False
+     
+        self.assertTrue(result)
 
 if __name__ == "__main__":
     unittest.main()

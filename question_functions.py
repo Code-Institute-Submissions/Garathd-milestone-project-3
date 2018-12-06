@@ -3,8 +3,8 @@ import os
 import json
 from flask import render_template, redirect
 
-#Set up highscore and questions text files
-high_score_list = "data/highscore.txt"
+#Set up score and questions text files
+score_list = "data/score.txt"
 question_list = "data/test.json"
 
 #Setting up a counter for Questions
@@ -61,7 +61,7 @@ def set_score(username, score):
     #Counting how many recent scores there is
     score_count = len(get_scores())
     
-    #If there are more than 9 most recent scores than overwrite the oldest record
+    #If there are more than 9 most recent scores than overwrite the oldest score
     if score_count >= 9:
         overwrite_score(username, score)
     else:
@@ -69,7 +69,7 @@ def set_score(username, score):
         data = "{0} got a total of {1} points\n".format(username, score)
         
         """Handle the process of writing data to a file"""
-        with open(high_score_list, "a") as file:
+        with open(score_list, "a") as file:
             file.writelines(data)
 
 #Get the most recent quiz scores
@@ -77,8 +77,8 @@ def get_scores():
     
     scores = []
     
-    with open(high_score_list, "r") as high_scores:
-        scores = high_scores.readlines()
+    with open(score_list, "r") as recent_scores:
+        scores = recent_scores.readlines()
     return scores
 
 #Overwrite the oldest quiz score
@@ -88,13 +88,13 @@ def overwrite_score(username, score):
     scores = get_scores()
     scores.pop(0)
     
-    #Delete highscore.txt file
-    os.remove(high_score_list)
+    #Delete score.txt file
+    os.remove(score_list)
     
     """Handle the process of writing data to a file"""
     for sc in scores:
-        """Recreating and Writing new information to highscore.txt """
-        with open(high_score_list, "a") as file:
+        """Recreating and Writing new information to score.txt """
+        with open(score_list, "a") as file:
             file.writelines(sc)
             
     set_score(username, score)
