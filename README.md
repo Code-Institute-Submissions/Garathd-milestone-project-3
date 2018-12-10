@@ -25,19 +25,19 @@ Future features I would like to implement are firstly connecting the web applica
 
 ### Python and Flask
 
-... Using Python for as much as this project as possible. Flask is the Python Framework I’m using for this application
+...Using Python for as much as this project as possible. Flask is the Python Framework I’m using for this application
 
 ### SCSS
-... Using Sass to better organise my CSS code
+...Using Sass to better organise my CSS code
 
 ### Javascript and jQuery
-... Using jQuery and javascript for scroll to top button and showing and hiding buttons and divs
+...Using jQuery and javascript for scroll to top button and showing and hiding buttons and divs
 
 ### Bootstrap 4
-... Using Bootstrap 4 Template from startbootstrap.com 
+...Using Bootstrap 4 Template from startbootstrap.com 
 
 ### Gulp
-... Using Gulp to watch out for SCSS changes and converting SCSS to CSS
+...Using Gulp to watch out for SCSS changes and converting SCSS to CSS
 
 
 ## Testing
@@ -47,17 +47,17 @@ Future features I would like to implement are firstly connecting the web applica
 ``` 
 def test_find_questions_list(self):
 ```
-... Testing to see if questions exist
+...Testing to see if questions exist
 
 ``` 
 def test_counter(self):
 ```
-... Testing to see if the counter increments
+...Testing to see if the counter increments
 
 ``` 
 def test_set_score(self):
 ```
-... Testing creation of a user score
+...Testing creation of a user score
 
 
 ## Deployment
@@ -66,5 +66,5 @@ def test_set_score(self):
 
 ## Media
 
-## Acknowledements
+## Acknowledgements
 
