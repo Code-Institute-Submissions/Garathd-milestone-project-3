@@ -23,48 +23,51 @@ Future features I would like to implement are firstly connecting the web applica
 
 ## Technologies Used
 
-1. Python and Flask
+### Python and Flask
 
-...Using Python for as much as this project as possible. Flask is the Python Framework I’m using for this application
+Using Python for as much as this project as possible. Flask is the Python Framework I’m using for this application
 
-2. SCSS
-...Using Sass to better organise my CSS code
+### SCSS
+Using Sass to better organise my CSS code
 
-3. Javascript and jQuery
-...Using jQuery and javascript for scroll to top button and showing and hiding buttons and divs
+### Javascript and jQuery
+Using jQuery and javascript for scroll to top button and showing and hiding buttons and divs
 
-4. Bootstrap 4
-...Using Bootstrap 4 Template from startbootstrap.com 
+### Bootstrap 4
+Using Bootstrap 4 Template from startbootstrap.com 
 
-5. Gulp
-...Using Gulp to watch out for SCSS changes and converting SCSS to CSS
+### Gulp
+Using Gulp to watch out for SCSS changes and converting SCSS to CSS
 
 
 ## Testing
 
 ### Unit Testing
 
-``` 
+```
+#Testing to see if questions exist
 def test_find_questions_list(self):
 ```
-* Testing to see if questions exist
 
 ``` 
+#Testing to see if the counter increments
 def test_counter(self):
 ```
-* Testing to see if the counter increments
 
 ``` 
+#Testing creation of a user score
 def test_set_score(self):
 ```
-* Testing creation of a user score
 
 
 ## Deployment
 
+
 ## Content
 
+
 ## Media
+
 
 ## Acknowledgements
 
