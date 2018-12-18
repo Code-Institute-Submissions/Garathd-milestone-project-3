@@ -22,7 +22,6 @@ def get_question(index):
 # Inialize the game with some default values
 def initialize(username):
     score = 0
-    attempt = 1
     question = get_question(0)
     data = {
         'question_index': 0,
