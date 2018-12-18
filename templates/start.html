@@ -1,0 +1,8 @@
+{% extends 'base.html' %} {% block content %}
+
+<h2>Hola {{username.capitalize()}}</h2>
+<form method="POST" action="/questions/{{ username }}">
+ <input type="hidden" value="true" name="start-game">
+ <button autofocus class="main-button btn btn-success btn-lg btn-block">Play Now!</button>
+</form>
+{% endblock %}

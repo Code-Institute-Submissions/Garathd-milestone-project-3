@@ -1,15 +1,19 @@
 {% extends 'base.html' %} {% block content %}
 
-<div id="scores">
-    <div class="row">
-        {% for results in quiz_results %}
-        <div class="col-md-4">
-            <div class="result">
-                <p>{{ results }}</p>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-</div>
-
+<section>
+    <table class="table leaderboard-table">
+        <tbody>
+            <tr>
+                <th>Username</th>
+                <th>High Score</th>
+            </tr>
+            {% for score in scores %}
+            <tr>
+                <td>{{ score[0].capitalize() }}</td>
+                <td>{{ score[1] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
 {% endblock %}

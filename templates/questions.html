@@ -1,36 +1,43 @@
 {% extends 'base.html' %} {% block content %}
 
+<div class="questions-heading">
+
+</div>
+
+<div class="answers-heading">
+
+</div>
+
 <div class="question-form">
-    
-    <div class="question-status">
-        <div class="row">
-            <div class="col-md-6">
-                <strong>Question:</strong> {{ counter + 1 }} / {{ amount }}
-            </div>
-            <div class="col-md-6">
-                <strong>Correct Answers:</strong> {{ correct }}
-            </div>
-        </div>
-    </div>
 
     <div class="row">
         <div class="col-md-12">
-            <h3>Can you translate: <i>{{ results.Spanish }}</i></h3>
+            {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category, message in messages %} {% if category == 'error' %}
+            <div class="messages alert alert-danger" role="alert">
+                <strong>Eso Está Mal {{ data.username.capitalize() }}!</strong> {{ message }}
+            </div>
+            {% else %}
+            <div class="messages alert alert-success" role="alert">
+                <strong>Muy Bien {{ data.username.capitalize() }}!</strong> {{ message }}
+            </div>
+            {% endif %} {% endfor %} {% endif %} {% endwith %}
+
+            <h2>Can you translate: <i>{{ data.Spanish}}</i></h2>
 
             <form name="answer" method="POST">
                 <div class="row">
-                    <div class="col-md-6">
-                        <input autocomplete="off" id="user-input" class="form-control" type="text" id="answer" name="answer" placeholder="Answer..." autofocus>
-                    </div>
-                    <div class="col-md-6">
-                        <button id="check" class="btn btn-primary">Check!</button>
+                    <div class="col-md-12">
+                        <input autocomplete="off" id="user-input" class="form-control" type="text" id="answer" name="user_answer" placeholder="Answer..." autofocus>
+                        <input type="hidden" name="question_index" id="question_index" value="{{ data.question_index }}">
+                        <input type="hidden" name="current_score" id="current_score" value="{{ data.current_score }}">
+                        <button id="check" class="btn btn-primary btn-lg btn-block">Check!</button>
                     </div>
                 </div>
             </form>
-
         </div>
     </div>
 
 </div>
+
 
 {% endblock %}

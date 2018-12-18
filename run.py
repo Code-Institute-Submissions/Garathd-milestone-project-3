@@ -1,176 +1,122 @@
-#!/usr/bin/env python
 import os
-import json
-import question_functions
-
-from flask import Flask, render_template, request, redirect
+import functions
+from flask import Flask, render_template, request, redirect, flash
 
 app = Flask(__name__)
+app.secret_key = 'This should be a secret!'
 
-""" 
-Redirects the homepage to the questions page.
-The Questions Page is the real homepage.
-This is just done for the purpose of routing.
-"""
 @app.route('/')
 def index():
-    return redirect("questions")
-    
-
-@app.route('/questions' , methods=["GET", "POST"])
-def questions():
-    
-    #Set up Page
-    title = "Question Game"
-    description = "Spanish Word Game"
-    
-    #Find out what question it's on
-    counter = question_functions.getCount()
-    
-    #Get the questions
-    amount = question_functions.getQuestions()
-    
-    #Get current question
-    results = amount[counter]
-    
-    #Get correct answers
-    correct = question_functions.getCorrectAnswers()
-    
-    #Submit answer
-    if request.method == "POST":
-        return redirect("questions/{0}".format(request.form["answer"])) 
-        
-    #Load Page Template
-    return render_template("questions.html", 
-    title=title, 
-    description=description, 
-    results=results, 
-    counter=counter, 
-    amount=len(amount),
-    correct=correct)
-
-
-@app.route('/questions/<question>', methods=["GET","POST"])
-def askQuestions(question):
-    
-    #Set up Page
-    title = "Question Game"
-    description = "Spanish Word Game"
-
-    #Find out what question it's on
-    counter = question_functions.getCount()
-
-    #Get the questions
-    amount = question_functions.getQuestions()
-    
-    #Get current question
-    results = amount[counter]
-    
-    #Get user answer
-    answer = question.lower()
-
-    #Check if users answer is correct
-    if results["English"] == answer:
-        passed = True
-        mark = "Well Done, You answered correctly!"
-    else:
-        passed = False
-        mark = "Your answer is incorrect!"
-
-    #Increment count to get the next question    
-    if request.method == "POST":
-        if passed == True:
-            question_functions.setCorrectAnswers()
-            
-        end_point = counter 
-        end_point +=1
-
-        #Check if the quiz is finished  
-        if end_point == len(amount):
-            return redirect("results") 
-        else:
-            question_functions.setCount()
-            return redirect("questions")     
-            
-    #Load Page Template
-    return render_template("answered.html",
-    title=title,
-    description=description,
-    results=results,
-    answer=answer,
-    mark=mark)
-    
-            
-@app.route('/results', methods=["GET","POST"])
-def results():
     
     #Set up page
-    title = "Quiz Results"
-    description = "Answers to the Spanish Quiz"
+    title = "Question Game"
+    description = "Start the Game"
     
-    #Setup for scores
-    correct_answers = question_functions.getCorrectAnswers()
-    total_questions = len(question_functions.getQuestions())
-    
-    #Checking if a form has been posted
-    if request.method == "POST":
-         print("Check request form: {0}".format(request.form))
-         
-         #Check if restart was selected
-         if(len(request.form) == 1):
-             
-             #Reset Questions
-             question_functions.resetQuestions()
-             
-             return redirect("questions")
-             
-         #Write the score to text file
-         else: 
-             question_functions.set_score(request.form["username"], correct_answers)
-            
-             #Reset Questions
-             question_functions.resetQuestions()
-             
-             return redirect("scores")
-
-    #Load Page Template
-    return render_template("results.html", 
-    correct_answers=correct_answers, 
-    total_questions=total_questions, 
-    title=title, 
+    return render_template("index.html",
+    title=title,
     description=description)
     
-              
+    
+@app.route('/start-game/', methods=['GET', 'POST'])
+def ready():
+    
+    #Set up page
+    title = "Start Game"
+    description = "Enter a Username"
+    
+    if request.method == 'POST':
+        form = request.form
+        username = form['username']
+        return render_template("start.html", 
+        username=username.lower(),
+        title=title,
+        description=description)
+    #If not accessed directly    
+    return redirect('/')
+    
+
+@app.route('/questions/<username>', methods=["GET","POST"])
+def questions(username):
+    
+    #Set up page
+    title = "Question Game"
+    description = "Hola {0}".format(username.capitalize())
+    
+    #Find out the length of the game
+    game_length = functions.get_file_length()
+
+    if request.method == 'POST':
+        form = request.form
+        
+        if form.get('start-game') == 'true':
+            data = functions.initialize(username)
+            return render_template('questions.html', 
+            data=data,
+            title=title,
+            description=description)
+            
+        else:
+            question_index = int(request.form.get('question_index'))
+            score = int(request.form.get('current_score'))
+            question = functions.get_question(question_index)
+            
+            # Check whether the answer is correct
+            user_answer = request.form.get('user_answer').lower().strip()
+            real_answer = question['English'].lower()
+            real_question = question['Spanish'].lower()
+            correct = user_answer == real_answer
+        
+            #Loops through the questions and displays on screen.
+            #Main Game Logic
+            while question_index < game_length:
+                
+                if correct:
+                    question_index += 1
+                    score += 1
+                    flash('The translation of {0} is {1}'.format(real_question,real_answer), 'success')
+                    next_question = functions.get_question(question_index)
+                    
+                else:
+                    question_index += 1
+                    flash('The translation of {0} is {1}. You said {2}'.format(real_question,real_answer,user_answer), 'error')
+                    next_question = functions.get_question(question_index)
+
+                if next_question is not None:
+                    data = {
+                        'question_index': question_index,
+                        'English': next_question['English'],
+                        'Spanish': next_question['Spanish'],
+                        'username': username,
+                        'current_score': score
+                    }
+                    return render_template('questions.html', data=data,
+                    title=title, description=description)
+            
+            # Return final score and add the player to the leaderboard
+            functions.set_high_score(username, score)
+            return render_template('scores.html', 
+            scores=functions.get_high_score(),
+            title="Game Over", description="{0} your score is: {1}".format(username.capitalize(), score))
+            
+    # Redirect to the homepage with an error if using GET
+    return redirect('/')
+    
+    
 @app.route('/scores')
 def scores():
     
-    #Set up Page
-    title = "Recent Scores"
-    description = "Checkout the Most Recent Scores"
+    #Set up page
+    title = "Question Game"
+    description = "High Scores"
+    
+    high_scores = functions.get_high_score()
 
-    #Get the 10 most recent scores
-    quiz_results = question_functions.get_scores()
-    
-    #Load Page Template
-    return render_template("scores.html", 
-    title=title, 
-    description=description,
-    quiz_results=quiz_results)
-    
-
-@app.route('/about')
-def about():
-    
-    #Set up Page
-    title = "About Page"
-    description = "Site Description and Info"
-    
-    #Load Page Template
-    return render_template("about.html",
+    return render_template('scores.html', 
+    scores=functions.get_high_score(),
     title=title,
     description=description)
     
-
+        
 app.run(
     host=os.getenv('IP'), 
     port=int(os.getenv('PORT')), 

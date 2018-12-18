@@ -1,5 +1,18 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
 
-{% block content %}
+<div class="question-form">
+    <form name="username" action="/start-game/" method="POST">
+        <div class="row">
+            <div class="col-md-12">
+                <input id="username" autofocus autocomplete="off" class="form-control" type="text" name="username" placeholder="ENTER YOUR USERNAME ..." required/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button class="main-button btn btn-success btn-lg btn-block">Click to Play!</button>
+            </div>
+        </div>
+    </form>
+</div>
 
 {% endblock %}

@@ -1,0 +1,7 @@
+-----------High Scores List-----------------
+Garath:1
+Mark:2
+trevor:3
+testing:4
+garath:4
+garath:3
