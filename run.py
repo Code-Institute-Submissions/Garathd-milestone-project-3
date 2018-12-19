@@ -102,7 +102,7 @@ def questions(username):
     return redirect('/')
     
     
-@app.route('/scores')
+@app.route('/scores', methods=["GET","POST"])
 def scores():
     
     #Set up page
@@ -110,6 +110,11 @@ def scores():
     description = "High Scores"
     
     high_scores = functions.get_high_score()
+    
+    #Resets the Game
+    if request.method == 'POST':
+        # Redirect to the homepage with an error if using GET
+        return redirect('/')
 
     return render_template('scores.html', 
     scores=functions.get_high_score(),
