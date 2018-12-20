@@ -49,7 +49,10 @@ def questions(username):
         form = request.form
         
         if form.get('start-game') == 'true':
+            
+            #Start the game with default values
             data = functions.initialize(username)
+            
             return render_template('questions.html', 
             data=data,
             title=title,
@@ -68,21 +71,33 @@ def questions(username):
                 real_question = question['Spanish'].lower()
                 correct = user_answer == real_answer
             
-                #Loops through the questions and displays on screen.
-                #Main Game Logic
+                """
+                Main Game Logic
+                """
                 while question_index < game_length:
                     
+                    #Correct Questions
                     if correct:
+                        #increment score and question index
                         question_index += 1
                         score += 1
+                        
                         flash('The translation of {0} is {1}'.format(real_question,real_answer), 'success')
+                        
+                        #Load Next Question
                         next_question = functions.get_question(question_index)
                         
+                    #Incorrect Questions    
                     else:
+                        #Increment question index
                         question_index += 1
+                        
                         flash('The translation of {0} is {1}. You said {2}'.format(real_question,real_answer,user_answer), 'error')
+                        
+                        #Load Next Question
                         next_question = functions.get_question(question_index)
     
+                    #Setting up question information to be rendered to html
                     if next_question is not None:
                         data = {
                             'question_index': question_index,
@@ -94,8 +109,9 @@ def questions(username):
                         return render_template('questions.html', data=data,
                         title=title, description=description)
                 
-                # Return final score and add the player to the leaderboard
+                #Set the score
                 functions.set_high_score(username, score)
+                
                 return render_template('scores.html', 
                 scores=functions.get_high_score(),
                 title="Game Over", description="{0} your score is: {1}".format(username.capitalize(), score))

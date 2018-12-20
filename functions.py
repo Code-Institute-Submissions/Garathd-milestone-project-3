@@ -43,6 +43,8 @@ def get_high_score():
         return sorted(ordered_scores, key=lambda val: val[1])[::-1][:10]
     
 def set_high_score(username, score):
+    
+    #Get Highscores
     high_scores = get_high_score()
 
     with open(score_source, 'a') as scores:
