@@ -56,47 +56,53 @@ def questions(username):
             description=description)
             
         else:
-            question_index = int(request.form.get('question_index'))
-            score = int(request.form.get('current_score'))
-            question = functions.get_question(question_index)
-            
-            # Check whether the answer is correct
-            user_answer = request.form.get('user_answer').lower().strip()
-            real_answer = question['English'].lower()
-            real_question = question['Spanish'].lower()
-            correct = user_answer == real_answer
-        
-            #Loops through the questions and displays on screen.
-            #Main Game Logic
-            while question_index < game_length:
-                
-                if correct:
-                    question_index += 1
-                    score += 1
-                    flash('The translation of {0} is {1}'.format(real_question,real_answer), 'success')
-                    next_question = functions.get_question(question_index)
-                    
-                else:
-                    question_index += 1
-                    flash('The translation of {0} is {1}. You said {2}'.format(real_question,real_answer,user_answer), 'error')
-                    next_question = functions.get_question(question_index)
 
-                if next_question is not None:
-                    data = {
-                        'question_index': question_index,
-                        'English': next_question['English'],
-                        'Spanish': next_question['Spanish'],
-                        'username': username,
-                        'current_score': score
-                    }
-                    return render_template('questions.html', data=data,
-                    title=title, description=description)
+            try:
+                question_index = int(request.form.get('question_index'))
+                score = int(request.form.get('current_score'))
+                question = functions.get_question(question_index)
+                
+                # Check whether the answer is correct
+                user_answer = request.form.get('user_answer').lower().strip()
+                real_answer = question['English'].lower()
+                real_question = question['Spanish'].lower()
+                correct = user_answer == real_answer
             
-            # Return final score and add the player to the leaderboard
-            functions.set_high_score(username, score)
-            return render_template('scores.html', 
-            scores=functions.get_high_score(),
-            title="Game Over", description="{0} your score is: {1}".format(username.capitalize(), score))
+                #Loops through the questions and displays on screen.
+                #Main Game Logic
+                while question_index < game_length:
+                    
+                    if correct:
+                        question_index += 1
+                        score += 1
+                        flash('The translation of {0} is {1}'.format(real_question,real_answer), 'success')
+                        next_question = functions.get_question(question_index)
+                        
+                    else:
+                        question_index += 1
+                        flash('The translation of {0} is {1}. You said {2}'.format(real_question,real_answer,user_answer), 'error')
+                        next_question = functions.get_question(question_index)
+    
+                    if next_question is not None:
+                        data = {
+                            'question_index': question_index,
+                            'English': next_question['English'],
+                            'Spanish': next_question['Spanish'],
+                            'username': username,
+                            'current_score': score
+                        }
+                        return render_template('questions.html', data=data,
+                        title=title, description=description)
+                
+                # Return final score and add the player to the leaderboard
+                functions.set_high_score(username, score)
+                return render_template('scores.html', 
+                scores=functions.get_high_score(),
+                title="Game Over", description="{0} your score is: {1}".format(username.capitalize(), score))
+            
+            except:
+                #Resets the game
+                print("Game Reset...")
             
     # Redirect to the homepage with an error if using GET
     return redirect('/')
@@ -106,16 +112,11 @@ def questions(username):
 def scores():
     
     #Set up page
-    title = "Question Game"
-    description = "High Scores"
+    title = "High Scores"
+    description = "View the Highest Scores"
     
     high_scores = functions.get_high_score()
     
-    #Resets the Game
-    if request.method == 'POST':
-        # Redirect to the homepage with an error if using GET
-        return redirect('/')
-
     return render_template('scores.html', 
     scores=functions.get_high_score(),
     title=title,

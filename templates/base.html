@@ -17,7 +17,8 @@
   <!-- Scripts -->
   <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
   <script src="{{ url_for('static', filename='js/index.js') }}"></script>
-  {% if title == "Question Game" or title == "Quiz Results" or "Recent Scores" %}
+  
+  {% if title == "Question Game" or title == "Start Game" %}
   <script src="{{ url_for('static', filename='js/questions.js') }}"></script>
   {% endif %}
 
