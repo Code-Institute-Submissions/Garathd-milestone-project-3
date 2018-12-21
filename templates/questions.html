@@ -6,15 +6,15 @@
         <div class="col-md-12">
             {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category, message in messages %} {% if category == 'error' %}
             <div class="messages alert alert-danger" role="alert">
-                <strong>Eso Está Mal {{ data.username.capitalize() }}!</strong> {{ message }}
+                <strong>Sorry {{ data.username.capitalize() }}!</strong> {{ message }}
             </div>
             {% else %}
             <div class="messages alert alert-success" role="alert">
-                <strong>Muy Bien {{ data.username.capitalize() }}!</strong> {{ message }}
+                <strong>Well Done {{ data.username.capitalize() }}!</strong> {{ message }}
             </div>
             {% endif %} {% endfor %} {% endif %} {% endwith %}
 
-            <h2>Can you translate: <i>{{ data.Spanish}}</i></h2>
+            <h2>Can you translate: <i class="word-to-translate">{{ data.Spanish}}</i></h2>
 
             <form name="answer" method="POST">
                 <div class="row">

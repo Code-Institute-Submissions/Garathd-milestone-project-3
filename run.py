@@ -43,7 +43,7 @@ def questions(username):
     
     #Set up page
     title = "Question Game"
-    description = "Hola {0}".format(username.capitalize())
+    description = "Welcome {0}!".format(username.capitalize())
     
     #Find out the length of the game
     game_length = functions.get_file_length()
