@@ -19,7 +19,7 @@
             <form name="answer" method="POST">
                 <div class="row">
                     <div class="col-md-12">
-                        <input autocomplete="off" id="user-input" class="form-control" type="text" id="answer" name="user_answer" placeholder="Answer..." autofocus>
+                        <input autocomplete="off" id="user-input" class="form-control" type="text" id="answer" name="user_answer" placeholder="Answer..." autofocus required>
                         <input type="hidden" name="question_index" id="question_index" value="{{ data.question_index }}">
                         <input type="hidden" name="current_score" id="current_score" value="{{ data.current_score }}">
                         <button id="check" class="btn btn-primary btn-lg btn-block">Check!</button>
@@ -28,8 +28,6 @@
             </form>
         </div>
     </div>
-
 </div>
-
 
 {% endblock %}

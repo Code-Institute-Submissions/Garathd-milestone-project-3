@@ -20,7 +20,7 @@
   padding-top: 1%;
 }
 
-.question-status{
+.question-status {
   padding: 0 0 5% 0;
 }
 
@@ -28,7 +28,12 @@
   font-weight: 900;
   font-size: 30px;
   color: #2E2E2E;
-  opacity: 0.3; }
+  opacity: 0.3;
+}
+
+.message-box {
+  height: 72px;
+}
 
 .main-button, #check{
   margin: 2% 0 !important;
