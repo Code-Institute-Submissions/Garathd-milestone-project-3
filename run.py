@@ -1,6 +1,6 @@
 import os
 import functions
-from flask import Flask, render_template, request, redirect, flash
+from flask import Flask, render_template, request, redirect, flash, session
 
 app = Flask(__name__)
 app.secret_key = 'This should be a secret!'
@@ -25,12 +25,15 @@ def ready():
     description = "Enter a Username"
     
     if request.method == 'POST':
+        
         form = request.form
         username = form['username']
+        
         return render_template("start.html", 
         username=username.lower(),
         title=title,
         description=description)
+        
     #If not accessed directly    
     return redirect('/')
     
@@ -45,12 +48,17 @@ def questions(username):
     #Find out the length of the game
     game_length = functions.get_file_length()
 
+    #Logic for every time the check button is pressed
     if request.method == 'POST':
+        
         form = request.form
         
+        """
+        Starts the game with default values when you access play the game 
+        from the start game page
+        """
         if form.get('start-game') == 'true':
             
-            #Start the game with default values
             data = functions.initialize(username)
             
             return render_template('questions.html', 
@@ -82,6 +90,7 @@ def questions(username):
                         question_index += 1
                         score += 1
                         
+                        #Displays message to my html when I get a question correct
                         flash('The translation of {0} is {1}'.format(real_question,real_answer), 'success')
                         
                         #Load Next Question
@@ -92,6 +101,7 @@ def questions(username):
                         #Increment question index
                         question_index += 1
                         
+                        #Displays message to my html when I get a question wrong
                         flash('The translation of {0} is {1}. You said {2}'.format(real_question,real_answer,user_answer), 'error')
                         
                         #Load Next Question
@@ -108,6 +118,10 @@ def questions(username):
                         }
                         return render_template('questions.html', data=data,
                         title=title, description=description)
+                    
+                    else:
+                        #Clears the messages
+                        session.pop('_flashes', None)    
                 
                 #Set the score
                 functions.set_high_score(username, score)
@@ -131,6 +145,7 @@ def scores():
     title = "High Scores"
     description = "View the Highest Scores"
     
+    #Get the high scores
     high_scores = functions.get_high_score()
     
     return render_template('scores.html', 
