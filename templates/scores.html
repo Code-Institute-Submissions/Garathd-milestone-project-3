@@ -1,23 +1,26 @@
 {% extends 'base.html' %} {% block content %}
 
-<section>
-    <table class="table leaderboard-table">
-        <tbody>
-            <tr>
-                <th>Username</th>
-                <th>High Score</th>
-            </tr>
-            {% for score in scores %}
-            <tr>
-                <td>{{ score[0].capitalize() }}</td>
-                <td>{{ score[1] }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</section>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table leaderboard-table">
+            <tbody>
+                <tr>
+                    <th>Username</th>
+                    <th>High Score</th>
+                </tr>
+                {% for score in scores %}
+                <tr>
+                    <td>{{ score[0].capitalize() }}</td>
+                    <td>{{ score[1] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 
-<form name="restart" method="POST" action="" name="restart">
-    <input class="main-button btn btn-success btn-lg btn-block" type="submit" value="restart" placeholder="Restart Game"/>
+{% if title == "Game Over" %}
+<form name="restart" method="POST" action="">
+    <input class="main-button btn btn-success btn-lg btn-block" type="submit" value="restart" placeholder="Restart Game" />
 </form>
-{% endblock %}
+{% endif %} {% endblock %}
