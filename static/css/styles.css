@@ -43,8 +43,20 @@ header.masthead {
   margin: 2% 0 !important;
   box-shadow: 5px 15px 20px #888888 !important; }
 
+.current-status {
+  overflow: hidden;
+  clear: both;
+  margin-bottom: 5%; }
+
+.current-question {
+  float: left; }
+
+.current-score {
+  float: right; }
+
 /*Table Stuff on Scores Page*/
-.table td, .table th {
+.table td,
+.table th {
   text-align: center !important; }
 
 .table th {

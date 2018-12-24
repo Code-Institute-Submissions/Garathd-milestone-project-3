@@ -14,6 +14,16 @@
             </div>
             {% endif %} {% endfor %} {% endif %} {% endwith %}
 
+            <div class="current-status">
+                <div class="current-question">
+                    <strong>Question: </strong>{{ data.question_index + 1 }} of {{ data.length }}
+                </div>
+                <div class="current-score">
+                    <strong>Score: </strong>{{ data.current_score }}
+                </div>
+            </div>
+
+
             <h2>Can you translate: <i class="word-to-translate">{{ data.Spanish}}</i></h2>
 
             <form name="answer" method="POST">

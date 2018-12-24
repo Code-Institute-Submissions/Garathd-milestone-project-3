@@ -114,7 +114,8 @@ def questions(username):
                             'English': next_question['English'],
                             'Spanish': next_question['Spanish'],
                             'username': username,
-                            'current_score': score
+                            'current_score': score,
+                            'length': game_length
                         }
                         return render_template('questions.html', data=data,
                         title=title, description=description)

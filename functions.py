@@ -1,7 +1,12 @@
 import os
 import json
 
+"""
+For Testing
+"""
 file_source = 'data/test.json'
+#file_source = 'data/words.json'
+
 score_source = 'data/scores.txt'
 file_length = 0
 
@@ -23,12 +28,14 @@ def get_question(index):
 def initialize(username):
     score = 0
     question = get_question(0)
+    game_length = get_file_length()
     data = {
         'question_index': 0,
         'Spanish': question['Spanish'],
         'English': question['English'],
         'username': username,
-        'current_score': score
+        'current_score': score,
+        'length': game_length
     }
     return data
     
