@@ -52,6 +52,13 @@ Using Gulp to watch out for SCSS changes and converting SCSS to CSS
 
 ## Testing
 
+### Manual Testing
+
+[HTML Validation](https://www.freeformatter.com/html-validator.html)
+[JSON Validation](https://www.freeformatter.com/json-validator.html)
+[CSS Validation](https://jigsaw.w3.org/css-validator/)
+
+
 ### Unit Testing
 
 ```
