@@ -2,7 +2,7 @@ import os
 import json
 
 """
-For Testing
+For Testing scores
 """
 file_source = 'data/test.json'
 #file_source = 'data/words.json'
