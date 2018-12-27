@@ -54,6 +54,9 @@ header.masthead {
 .current-score {
   float: right; }
 
+#footer {
+  background: #263238; }
+
 /*Table Stuff on Scores Page*/
 .table td,
 .table th {
