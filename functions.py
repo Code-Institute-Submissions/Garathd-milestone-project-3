@@ -1,12 +1,7 @@
 import os
 import json
 
-"""
-For Testing scores
-"""
-file_source = 'data/test.json'
-#file_source = 'data/words.json'
-
+file_source = 'data/words.json'
 score_source = 'data/scores.txt'
 file_length = 0
 

@@ -131,9 +131,8 @@ def questions(username):
                 scores=functions.get_high_score(),
                 title="Game Over", description="{0} your score is: {1}".format(username.capitalize(), score))
             
-            except:
-                #Resets the game
-                print("Game Reset...")
+            #Game restart error handling
+            except Exception as e: print("Error : {}".format(e))
             
     # Redirect to the homepage with an error if using GET
     return redirect('/')
