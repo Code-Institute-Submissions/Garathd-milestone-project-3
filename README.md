@@ -85,7 +85,15 @@ This test is designed to get the high score list and copy the highest score in t
 
 During development, all code was written in Cloud 9 and updates were saved and tested locally. Throughout the process I used GitHub to keep track of changes and to maintain version control in my code base.
 
-The final version of my application will be pushed to Heroku
+The production version of my application is deployed to heroku [garath-project-3](https://garath-project-3.herokuapp.com/).
+
+### Heroku Deployment Steps
+1. Go to the Heroku Website and create new app
+2. Create requirements.txt and Procfile to tell heroku what is required to run the app
+3. Login into Heroku Account via command line and add the newly created app
+4. Go back to Heroku Website and in the settings tab click *Reveal Config Vars* and add IP and PORT vars from Project Config
+5. Restart all dynos
+6. Finally do an initial git commit and push to heroku
 
 
 ## Content
