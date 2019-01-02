@@ -148,6 +148,9 @@ def scores():
     #Get the high scores
     high_scores = functions.get_high_score()
     
+    if request.method == 'POST':
+        redirect("/")
+    
     return render_template('scores.html', 
     scores=functions.get_high_score(),
     title=title,

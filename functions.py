@@ -5,9 +5,11 @@ file_source = 'data/words.json'
 score_source = 'data/scores.txt'
 file_length = 0
 
+# Get the length of the word list
 def get_file_length():
     return file_length
 
+# Set the length on the word list
 def set_file_length(length):
     global file_length
     file_length = length
