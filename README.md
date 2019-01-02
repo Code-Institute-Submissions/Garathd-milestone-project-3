@@ -83,9 +83,11 @@ This test is designed to get the high score list and copy the highest score in t
 
 ## Deployment
 
-During development, all code was written in Cloud 9 and updates were saved and tested locally. Throughout the process I used GitHub to keep track of changes and to maintain version control in my code base.
+During development, all code was written in Cloud 9 and updates were saved and tested locally. Throughout the process I used [GitHub](https://github.com/Garathd/milestone-project-3) to keep track of changes and to maintain version control in my code base.
 
-The production version of my application is deployed to heroku [garath-project-3](https://garath-project-3.herokuapp.com/).
+The development version of my application is on github and I push this code using *git push*
+
+The production version of my application is deployed to heroku and I push this code using *git push heroku*  [garath-project-3](https://garath-project-3.herokuapp.com/).
 
 ### Heroku Deployment Steps
 1. Go to the Heroku Website and create new app
