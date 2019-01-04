@@ -63,6 +63,9 @@ Using Gulp to watch out for SCSS changes and converting SCSS to CSS
 
 ### Unit Testing
 
+To run unit tests: ```python3 -u test_questions.py```
+
+
 ```
 #Testing to see if questions exist
 def test_find_questions_list(self):

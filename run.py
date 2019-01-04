@@ -75,8 +75,8 @@ def questions(username):
                 
                 # Check whether the answer is correct
                 user_answer = request.form.get('user_answer').lower().strip()
-                real_answer = question['English'].lower()
-                real_question = question['Spanish'].lower()
+                real_answer = question['english'].lower()
+                real_question = question['spanish'].lower()
                 correct = user_answer == real_answer
             
                 """
@@ -111,8 +111,8 @@ def questions(username):
                     if next_question is not None:
                         data = {
                             'question_index': question_index,
-                            'English': next_question['English'],
-                            'Spanish': next_question['Spanish'],
+                            'english': next_question['english'],
+                            'spanish': next_question['spanish'],
                             'username': username,
                             'current_score': score,
                             'length': game_length

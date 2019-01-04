@@ -3,6 +3,10 @@ header.masthead {
   background-image: url('https://www.thegreatcoursesdaily.com/wp-content/uploads/2018/03/Learning-spanish-post-feature-image.jpg') !important;
 }
 
+.main-container{
+  min-height: calc(100vh - 834.328px);
+}
+
 #answers {
   margin: 5% 0 5% 0;
 }

@@ -1,0 +1,12 @@
+{
+  "name": "learn-spanish-web-app",
+  "description": "Spanish Word Game",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "gulp": "^3.9.1",
+  },
+  "devDependencies": {
+    "gulp-sass": "^4.0.1"
+  }
+}
